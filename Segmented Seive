@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int L,R;
+	cin>>L>>R;
+	int n = sqrt(R);
+	vector<bool>v(R+1,true);
+	for(int i=2;i<=n;i++){
+		int j=i*i;
+		if(v[i]){
+			while(j<n){
+				v[j]=false;
+				j+=i;
+			}
+		}
+	}
+	int j;
+	for(int i=2;i<=n;i++){
+		if(v[i]){
+			if(L%i==0){
+				j=L;
+			}
+			else{
+				j=i*((L/i)+1);
+			}
+			for(int k=j;k<=R;k+=i){
+				if(v[k] and i!=k){
+					v[k]=false;
+				}
+			}
+		}
+	}
+	for(int i = L; i<=R;i++)
+	{
+		if(v[i]) cout<<i<<" ";
+	}
+}
